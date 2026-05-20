@@ -6,7 +6,7 @@ Not every project in this repository is meant to be a polished final product. So
 
 ---
 
-## Purpose
+## Purpose 
 
 The goal of this repository is to document my technical learning process and preserve useful engineering work over time.
 
