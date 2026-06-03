@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Auction</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+</head>
+<body>
+    <h1>Create Auction</h1>
+    <form id="createAuctionForm" action="/createAuction" method="post">
+        <label for="itemName">Item Name:</label>
+        <input type="text" id="itemName" name="itemName" required>
+        <br>
+        <label for="startingPrice">Starting Price (in ETH):</label>
+        <input type="number" id="startingPrice" name="startingPrice" required min="0.00000001" step="any">
+        <br>
+        <button type="submit" id="createAuctionBtn">Create Auction</button>
+    </form>
+
+    <script src="/create.js"></script>
+</body>
+</html>

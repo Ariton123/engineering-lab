@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Auctions</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bn.js@5.2.0/lib/bn.js"></script>
+    <style>
+        .auction {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Auctions</h1>
+    <div id="auctions"></div>
+
+    <script>
+        const contractABI = [
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_auctionId",
+				"type": "uint256"
+			}
+		],
+		"name": "approveAuction",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "auctionId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "state",
+				"type": "uint256"
+			}
+		],
+		"name": "AuctionApproved",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "auctionId",
+				"type": "uint256"
+			}
+		],
+		"name": "AuctionCreated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "auctionId",
+				"type": "uint256"
+			}
+		],
+		"name": "AuctionDiscarded",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "auctionId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "bidder",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "BidPlaced",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_itemName",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_startingPrice",
+				"type": "uint256"
+			}
+		],
+		"name": "createAuction",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_auctionId",
+				"type": "uint256"
+			}
+		],
+		"name": "discardAuction",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_auctionId",
+				"type": "uint256"
+			}
+		],
+		"name": "placeBid",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "auctions",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "itemName",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "startingPrice",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address payable",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"internalType": "address payable",
+				"name": "highestBidder",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "highestBid",
+				"type": "uint256"
+			},
+			{
+				"internalType": "enum Auction.AuctionState",
+				"name": "state",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_index",
+				"type": "uint256"
+			}
+		],
+		"name": "getAuctionByIndex",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "enum Auction.AuctionState",
+				"name": "",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getAuctionCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+];
+        const contractAddress = '0x566596656043aa196b6059e5fe46263437dde491';
+        
+        const auctions = <%- JSON.stringify(auctions) %>;
+
+        window.addEventListener('load', async () => {
+            if (window.ethereum) {
+                window.web3 = new Web3(window.ethereum);
+                try {
+                    await window.ethereum.request({ method: 'eth_requestAccounts' });
+                } catch (error) {
+                    console.error("User denied account access");
+                }
+            } else if (window.web3) {
+                window.web3 = new Web3(window.web3.currentProvider);
+            } else {
+                console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
+            }
+
+            const web3 = window.web3;
+
+            const renderAuctions = () => {
+                const auctionsDiv = document.getElementById('auctions');
+                auctionsDiv.innerHTML = '';
+                auctions.forEach(auction => {
+                    const auctionDiv = document.createElement('div');
+                    auctionDiv.className = 'auction';
+
+                    console.log('Starting Price:', auction.startingPrice);
+                    console.log('Highest Bid:', auction.highestBid);
+
+                    try {
+                        const startingPrice = web3.utils.toWei(auction.startingPrice.toString(), 'ether');
+                        const highestBid = web3.utils.toWei(auction.highestBid.toString(), 'ether');
+
+                        auctionDiv.innerHTML = `
+                            <p>Item: ${auction.itemName}</p>
+                            <p>Starting Price: ${web3.utils.fromWei(startingPrice, 'ether')} ETH</p>
+                            <p>Highest Bid: ${web3.utils.fromWei(highestBid, 'ether')} ETH</p>
+                            <p>Highest Bidder: ${auction.highestBidder || 'None'}</p>
+                            <form onsubmit="placeBid('${auction.id}', this.bidAmount.value); return false;">
+                                <input type="number" name="bidAmount" required min="${web3.utils.fromWei((highestBid + web3.utils.toWei('0.001', 'ether')).toString(), 'ether')}" step="any">
+                                <button type="submit">Place Bid</button>
+                            </form>
+                        `;
+                    } catch (error) {
+                        console.error('Error converting to BN:', error);
+                        auctionDiv.innerHTML = `
+                            <p>Item: ${auction.itemName}</p>
+                            <p>Starting Price: Invalid</p>
+                            <p>Highest Bid: Invalid</p>
+                            <p>Highest Bidder: ${auction.highestBidder || 'None'}</p>
+                        `;
+                    }
+
+                    auctionsDiv.appendChild(auctionDiv);
+                });
+            };
+
+            window.placeBid = async (auctionId, bidAmount) => {
+                if (window.ethereum) {
+                    const web3 = new Web3(window.ethereum);
+                    try {
+                        await window.ethereum.request({ method: 'eth_requestAccounts' });
+                        const accounts = await web3.eth.getAccounts();
+                        const contractInstance = new web3.eth.Contract(contractABI, contractAddress);
+                        const bidAmountInWei = web3.utils.toWei(bidAmount, 'ether');
+
+                        const auction = await contractInstance.methods.getAuctionByIndex(auctionId).call();
+                        const state = BigInt(auction[5]);
+                        const highestBid = BigInt(auction[4]);
+
+                        if (state !== BigInt(1)) {
+                            alert('Auction is not approved');
+                            return;
+                        }
+                        if (BigInt(bidAmountInWei) <= highestBid) {
+                            alert('Bid must be higher than current highest bid');
+                            return;
+                        }
+
+                        await contractInstance.methods.placeBid(auctionId).send({
+                            from: accounts[0],
+                            value: bidAmountInWei,
+                            gas: 300000,
+                            gasPrice: web3.utils.toWei('20', 'gwei')
+                        });
+
+                        alert('Bid placed successfully');
+                        location.reload();
+                    } catch (error) {
+                        console.error('Error placing bid:', error);
+                        alert('Failed to place bid');
+                    }
+                } else {
+                    alert('MetaMask not detected. Please install MetaMask to use this feature.');
+                }
+            };
+
+            renderAuctions();
+        });
+    </script>
+</body>
+</html>
