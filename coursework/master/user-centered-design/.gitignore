@@ -1,0 +1,17 @@
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.bak
+~$*
+
+# Keep raw private research material out of public repo
+*raw*
+*private*
+*original*
+UCD_interviews.pdf
+PaperPrototype.pdf
