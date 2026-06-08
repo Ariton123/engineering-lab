@@ -1,0 +1,40 @@
+# Maven build output
+
+target/
+
+# Compiled Java files
+
+*.class
+
+# IntelliJ IDEA
+
+.idea/
+*.iml
+*.iws
+
+# Eclipse / STS
+
+.project
+.classpath
+.settings/
+
+# VS Code
+
+.vscode/
+
+# Logs
+
+*.log
+
+# Environment and local configuration
+
+.env
+.env.*
+application-local.properties
+application-dev.properties
+application-prod.properties
+
+# OS files
+
+.DS_Store
+Thumbs.db
