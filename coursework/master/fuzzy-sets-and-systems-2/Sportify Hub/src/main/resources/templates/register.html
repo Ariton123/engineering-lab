@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 60px;
+            padding: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 400px;
+            padding: 45px;
+            margin: 40px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            overflow-y: auto; /* Add this line */
+        }
+
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .profile-info, .form-group {
+            margin-bottom: 20px;
+        }
+
+        .profile-info label, .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .profile-info p, .profile-info input, .form-group input, .form-group select, .form-group button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .button {
+            display: inline-block;
+            margin: 10px 5px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .danger-button {
+            background-color: #ff4d4d;
+        }
+
+        .danger-button:hover {
+            background-color: #cc0000;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .modal-content h2 {
+            margin: 0 0 15px;
+        }
+
+        .modal-content button {
+            margin: 5px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .modal-content .confirm-button {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .modal-content .cancel-button {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
+    <script>
+        function showAdditionalFields() {
+            document.getElementById('additionalFields').classList.remove('hidden');
+            document.getElementById('nextButton').classList.add('hidden');
+            document.getElementById('registerButton').classList.remove('hidden');
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <h1>Register</h1>
+    <form th:action="@{/register}" method="post">
+        <div class="form-group">
+            <input type="text" name="username" placeholder="Username" required />
+        </div>
+        <div class="form-group">
+            <input type="text" name="email" placeholder="Email" required />
+        </div>
+        <div class="form-group">
+            <input type="password" name="password" placeholder="Password" required />
+        </div>
+
+        <div id="additionalFields" class="hidden">
+            <div class="form-group">
+                <input type="text" name="name" placeholder="Name" required />
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <select name="age" id="age" required>
+                    <option value="" selected>How do you classify yourself considering your age?</option>
+                    <option value="Young" th:selected="${user.age == 'Young'}">Young</option>
+                    <option value="Young turning into adult" th:selected="${user.age == 'Young turning into adult'}">Young turning into adult</option>
+                    <option value="Adult" th:selected="${user.age == 'Adult'}">Adult</option>
+                    <option value="Adult getting old" th:selected="${user.age == 'Adult getting old'}">Adult getting old</option>
+                    <option value="Old" th:selected="${user.age == 'Old'}">Old</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="height">Height:</label>
+                <select name="height" id="height" required>
+                    <option value="" selected>Select your height</option>
+                    <option value="Short" th:selected="${user.height == 'Short'}">Short</option>
+                    <option value="Average" th:selected="${user.height == 'Average'}">Average</option>
+                    <option value="Tall" th:selected="${user.height == 'Tall'}">Tall</option>
+                </select>
+
+            </div>
+
+            <div class="form-group">
+                <label for="weight">Weight:</label>
+                <select name="weight" id="weight" required>
+                    <option value="" selected>Select your weight</option>
+                    <option value="Light" th:selected="${user.weight == 'Light'}">Light</option>
+                    <option value="Medium" th:selected="${user.weight == 'Medium'}">Medium</option>
+                    <option value="Heavy" th:selected="${user.weight == 'Heavy'}">Heavy</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="" selected>Select your gender</option>
+                    <option value="Male" th:selected="${user.gender == 'Male'}">Male</option>
+                    <option value="Female" th:selected="${user.gender == 'Female'}">Female</option>
+                    <option value="Other" th:selected="${user.gender == 'Other'}">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="goal">Goal:</label>
+                <select name="goal" id="goal" required>
+                    <option value="" selected>Select your goal</option>
+                    <option value="Slightly lose weight" th:selected="${user.goal == 'Slightly lose weight'}">Slightly lose weight</option>
+                    <option value="Moderately lose weight" th:selected="${user.goal == 'Moderately lose weight'}">Moderately lose weight</option>
+                    <option value="Significantly lose weight" th:selected="${user.goal == 'Significantly lose weight'}">Significantly lose weight</option>
+                    <option value="Light muscle build" th:selected="${user.goal == 'Light muscle build'}">Light muscle build</option>
+                    <option value="Moderate muscle build" th:selected="${user.goal == 'Moderate muscle build'}">Moderate muscle build</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="favoriteSport">Favorite Sport:</label>
+                <select name="favoriteSport" id="favoriteSport" required>
+                    <option value="" selected>Select your favorite fuzzy sport</option>
+                    <option value="Team Sports" th:selected="${user.favoriteSport == 'Team Sports'}">Team Sports</option>
+                    <option value="Individual Sports" th:selected="${user.favoriteSport == 'Individual Sports'}">Individual Sports</option>
+                    <option value="Combat Sports" th:selected="${user.favoriteSport == 'Combat Sports'}">Combat Sports</option>
+                    <option value="Adventure Sports" th:selected="${user.favoriteSport == 'Adventure Sports'}">Adventure Sports</option>
+                    <option value="Racquet Sports" th:selected="${user.favoriteSport == 'Racquet Sports'}">Racquet Sports</option>
+                </select>
+            </div>
+        </div>
+
+        <button type="button" class="button" id="nextButton" onclick="showAdditionalFields()">Next</button>
+        <button type="submit" class="button hidden" id="registerButton">Register</button>
+    </form>
+</div>
+</body>
+</html>

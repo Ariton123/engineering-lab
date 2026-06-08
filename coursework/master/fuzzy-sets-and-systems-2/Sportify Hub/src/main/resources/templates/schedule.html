@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Training Session</title>
+    <style>
+        /* Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+        /* Colors */
+        :root {
+            --primary-color: #007bff;
+            --text-color: #333;
+            --background-color: #f4f4f4;
+            --form-bg-color: #fff;
+            --form-border-color: #ccc;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 80px auto;
+            padding: 40px;
+            background-color: var(--form-bg-color);
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--text-color);
+        }
+
+        label {
+            display: inline-block;
+            width: 120px;
+            text-align: right;
+            margin-right: 10px;
+            color: var(--text-color);
+        }
+
+        input[type="date"],
+        input[type="time"],
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid var(--form-border-color);
+            border-radius: 4px;
+            background-color: var(--form-bg-color);
+            color: var(--text-color);
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="date"]:hover,
+        input[type="date"]:focus,
+        input[type="time"]:hover,
+        input[type="time"]:focus,
+        button:hover {
+            border-color: var(--primary-color);
+        }
+
+        button {
+            background-color: var(--primary-color);
+            cursor: pointer;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Schedule Training Session</h1>
+    <p>You've selected <span th:text="${selectedSport}">sport</span>.</p>
+    <!-- Add a form to capture scheduling details -->
+    <form action="/schedule" method="post">
+        <input type="hidden" name="selectedSport" th:value="${selectedSport}"/>
+        <label for="date">Select date:</label>
+        <input type="date" id="date" name="date" required/><br><br>
+        <label for="time">Select time:</label>
+        <input type="time" id="time" name="time" required/><br><br>
+        <button type="submit">Schedule</button>
+    </form>
+</div>
+</body>
+</html>

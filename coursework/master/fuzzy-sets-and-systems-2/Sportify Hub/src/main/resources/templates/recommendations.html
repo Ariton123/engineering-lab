@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Exercise Recommendations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 80px auto;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .sports-category {
+            margin-top: 30px;
+        }
+
+        .sports-category h2 {
+            color: #007bff;
+        }
+
+        .sports-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sports-list-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .sports-list-item a {
+            text-decoration: none;
+            color: #fff;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .sports-list-item a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Exercise Recommendations</h1>
+    <p>You have <span th:text="${freeTime}">free time</span> to exercise today and your goal is <span th:text="${goal}">goal</span>.</p>
+
+    <div class="sports-category">
+        <h2>Individual Sports</h2>
+        <ul class="sports-list">
+            <li th:each="sport : ${individualSports}" class="sports-list-item">
+                <a th:href="@{'/schedule/individual/' + ${sport}}"><span th:text="${sport}"></span></a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="sports-category">
+        <h2>Team Sports</h2>
+        <ul class="sports-list">
+            <li th:each="sport : ${teamSports}" class="sports-list-item">
+                <a th:href="@{'/schedule/team/' + ${sport}}"><span th:text="${sport}"></span></a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="sports-category">
+        <h2>Combat Sports</h2>
+        <ul class="sports-list">
+            <li th:each="sport : ${combatSports}" class="sports-list-item">
+                <a th:href="@{'/schedule/combat/' + ${sport}}"><span th:text="${sport}"></span></a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="sports-category">
+        <h2>Adventure Sports</h2>
+        <ul class="sports-list">
+            <li th:each="sport : ${adventureSports}" class="sports-list-item">
+                <a th:href="@{'/schedule/adventure/' + ${sport}}"><span th:text="${sport}"></span></a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="sports-category">
+        <h2>Racquet Sports</h2>
+        <ul class="sports-list">
+            <li th:each="sport : ${racquetSports}" class="sports-list-item">
+                <a th:href="@{'/schedule/racquet/' + ${sport}}"><span th:text="${sport}"></span></a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 60px;
+            padding: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 400px;
+            padding: 45px;
+            margin: 40px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            overflow-y: auto; /* Add this line */
+        }
+
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .profile-info, .form-group {
+            margin-bottom: 20px;
+        }
+
+        .profile-info label, .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .profile-info p, .profile-info input, .form-group input, .form-group select, .form-group button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .button {
+            display: inline-block;
+            margin: 10px 5px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .button-container .button {
+            flex: 1;
+            margin: 5px;
+        }
+        .delete-button-container {
+            width: 100%;
+        }
+        .delete-button-container .button {
+            width: 100%;
+            margin: 5px 0;
+        }
+
+        .danger-button {
+            background-color: #ff4d4d;
+        }
+
+        .danger-button:hover {
+            background-color: #cc0000;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .modal-content h2 {
+            margin: 0 0 15px;
+        }
+
+        .modal-content button {
+            margin: 5px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .modal-content .confirm-button {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .modal-content .cancel-button {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
+    <script>
+        function togglePassword() {
+            var passwordField = document.getElementById('password');
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+            } else {
+                passwordField.type = 'password';
+            }
+        }
+
+        function openModal() {
+            document.getElementById('forgetPasswordModal').style.display = 'block';
+        }
+
+        function openMessageModal() {
+            document.getElementById('messageModal').style.display = 'block';
+        }
+
+        function closeMessageModal() {
+            document.getElementById('messageModal').style.display = 'none';
+        }
+
+        function closeModal() {
+            document.getElementById('forgetPasswordModal').style.display = 'none';
+        }
+
+        function forgetPassword() {
+            // Logic for forgetting password
+            closeModal();
+            openMessageModal();
+        }
+
+        window.onclick = function(event) {
+            var modal = document.getElementById('forgetPasswordModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="container" style="margin-top: 50px">
+    <h1>Profile</h1>
+    <div class="profile-info">
+        <label for="password" >Username:</label>
+            <input type="text" name="username" th:value="${user.username}" required />
+        </div>
+        <div class="form-group">
+            <label for="password" >Email:</label>
+            <input type="text" name="email"  th:value="${user.email}" required />
+        </div>
+    <div class="form-group">
+        <label for="password" >Password:</label>
+        <input type="password" id="password"  th:value="${user.password}" readonly />
+    </div>
+        <button type="button" class="button" onclick="togglePassword()">Show/Hide Password</button>
+        <button type="button" class="button" onclick="openModal()">Forget Password</button>
+    <form th:action="@{/api/users/update}" method="post">
+        <input type="hidden" name="id" th:value="${user.id}" />
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <select name="age" id="age" th:value="${user.age}" required>
+                <option value="" selected>How do you classify yourself considering your age?</option>
+                <option value="Young" th:selected="${user.age == 'Young'}">Young</option>
+                <option value="Young turning into adult" th:selected="${user.age == 'Young turning into adult'}">Young turning into adult</option>
+                <option value="Adult" th:selected="${user.age == 'Adult'}">Adult</option>
+                <option value="Adult getting old" th:selected="${user.age == 'Adult getting old'}">Adult getting old</option>
+                <option value="Old" th:selected="${user.age == 'Old'}">Old</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="height">Height:</label>
+            <select name="height" id="height" th:value="@{user.height}" required>
+                <option value="" selected>Select your height</option>
+                <option value="Short" th:selected="${user.height == 'Short'}">Short</option>
+                <option value="Average" th:selected="${user.height == 'Average'}">Average</option>
+                <option value="Tall" th:selected="${user.height == 'Tall'}">Tall</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="weight">Weight:</label>
+            <select name="weight" id="weight" th:value="@{user.weight}" required>
+                <option value="" selected>Select your weight</option>
+                <option value="Light" th:selected="${user.weight == 'Light'}">Light</option>
+                <option value="Medium" th:selected="${user.weight == 'Medium'}">Medium</option>
+                <option value="Heavy" th:selected="${user.weight == 'Heavy'}">Heavy</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="gender">Gender:</label>
+            <input id="gender" name="gender" th:value="${user.gender}" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="goal">Goal:</label>
+            <select id="goal" name="goal" th:value="${user.goal}" required>
+                <option value="Lose weight">Lose weight</option>
+                <option value="Maintain weight">Maintain weight</option>
+                <option value="Gain weight">Gain weight</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="favoriteSport">Favorite Sport:</label>
+            <select name="favoriteSport" id="favoriteSport" th:value="@{user.favoriteSport}" required>
+                <option value="" selected>Select your favorite fuzzy sport</option>
+                <option value="Team Sports" th:selected="${user.favoriteSport == 'Team Sports'}">Team Sports</option>
+                <option value="Individual Sports" th:selected="${user.favoriteSport == 'Individual Sports'}">Individual Sports</option>
+                <option value="Combat Sports" th:selected="${user.favoriteSport == 'Combat Sports'}">Combat Sports</option>
+                <option value="Adventure Sports" th:selected="${user.favoriteSport == 'Adventure Sports'}">Adventure Sports</option>
+                <option value="Racquet Sports" th:selected="${user.favoriteSport == 'Racquet Sports'}">Racquet Sports</option>
+            </select>
+        </div>
+    </form>
+
+    <div class="button-container">
+        <button type="submit" class="button">Update Profile</button>
+        <button type="button" class="button" onclick="location.href='/home'">Back</button>
+    </div>
+
+    <div class="delete-button-container">
+        <form th:action="@{/api/users/delete}" method="post">
+            <input type="hidden" name="id" th:value="${user.id}" />
+            <button type="submit" class="button danger-button">Delete Account</button>
+        </form>
+    </div>
+</div>
+
+
+<!-- Forget Password Modal -->
+<div id="forgetPasswordModal" class="modal">
+    <div class="modal-content">
+        <h2>Forget Password</h2>
+        <p>Are you sure you want to reset your password?</p>
+        <button type="button" class="confirm-button" onclick="forgetPassword()">Yes</button>
+        <button type="button" class="cancel-button" onclick="closeModal()">No</button>
+    </div>
+</div>
+
+<div id="messageModal" class="modal">
+    <div class="modal-content">
+        <h2>Reset Password</h2>
+        <p>Password reset link has been sent to your email.</p>
+        <button type="button" onclick="closeMessageModal()">OK</button>
+    </div>
+</div>
+
+
+</body>
+</html>

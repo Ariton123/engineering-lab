@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <style>
+        /* Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+        /* Colors */
+        :root {
+            --primary-color: #007bff;
+            --primary-hover-color: #0056b3;
+            --text-color: #333;
+            --subtext-color: #666;
+            --background-color: #f4f4f4;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .error-container {
+            text-align: center;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: var(--text-color);
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: var(--subtext-color);
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            background-color: var(--primary-color);
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: var(--primary-hover-color);
+        }
+    </style>
+</head>
+<body>
+<div class="error-container">
+    <h1>Oops! Something went wrong.</h1>
+    <p>We're sorry, but an unexpected error occurred.</p>
+    <a href="/" class="button">Back to Home</a>
+</div>
+</body>
+</html>
