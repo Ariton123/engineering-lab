@@ -6,6 +6,19 @@ This repository contains a seminar project developed for the **Seminar Social Co
 
 The project explores ethical considerations in social computing, with a specific focus on privacy, transparency, fair treatment, and discrimination risks in shared workforce arrangements. The final report connects social computing ethics with the **Balanced Workforce** concept, where employees may be temporarily loaned or shared between companies.
 
+## Project Team
+
+This project was completed by:
+
+* Ariton Verush
+* Martin Stojkovski
+
+Academic context:
+
+* Seminar: Social Computing
+* Professor: Edy Portmann
+* Assistant: Narek Andreasyan
+
 ## Project Context
 
 Social computing technologies shape how people communicate, collaborate, and participate in digital environments. In workforce management contexts, these systems can introduce ethical challenges related to employee treatment, privacy, transparency, and decision-making.
