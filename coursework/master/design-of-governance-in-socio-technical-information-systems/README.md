@@ -6,6 +6,21 @@ Balanced Workforce is a socio-technical systems design project developed for the
 
 The project explores a platform-based model for temporary inter-company employee leasing. The central idea is to help companies balance workforce demand and availability by allowing companies with underutilized employees to temporarily share skilled workers with companies facing staffing gaps, project-specific needs, or short-term workload increases.
 
+## Project Team
+
+This project was completed by:
+
+* Ariton Verush
+* Melody Amaizu
+* Martin Stojkovski
+
+Academic context:
+
+* Course: Design of Governance in Socio-Technical Information Systems
+* University: University of Neuchâtel
+* Professor: Alain Sandoz
+* Assistant: Andreas Athanasopoulos
+
 ## Project Context
 
 Many companies struggle to adapt their workforce quickly to changing market or project demands. Recruiting and training new employees can be expensive and slow, while other companies may simultaneously have skilled employees without active project assignments.
