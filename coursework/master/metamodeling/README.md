@@ -4,6 +4,18 @@ This project was developed during my Master's studies in Computer Science as par
 
 The work focuses on domain-specific modeling, notation design, and implementation using ADOxx-related technologies, including AdoScript, `.adl`, `.abl`, and model instance files.
 
+## Project Team
+
+This project was completed by:
+
+* Andrei Anikin
+* Ariton Verush
+
+Academic context:
+
+* Course: Metamodeling
+* Professor: Simon Curty
+
 ## Project Overview
 
 The project explores how custom modeling concepts, graphical notations, and model instances can be defined and implemented within a metamodeling environment.
