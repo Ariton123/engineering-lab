@@ -4,6 +4,19 @@ This project was developed during the first semester of my Master's studies in C
 
 The application explores a decentralized auction system using blockchain-related technologies, smart contracts, and a web-based application architecture.
 
+## Project Team
+
+This project was completed by:
+
+* Ariton Verush
+* Martin Stojkovski
+
+Academic context:
+
+* Course: Digitalization and Information Systems
+* Professor: Hans-Georg Fill
+* Assistant: Simon Curty
+
 ## Project Overview
 
 The system combines a Solidity smart contract with a Node.js-based web application and supporting architectural documentation.
