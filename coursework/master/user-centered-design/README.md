@@ -6,6 +6,20 @@ Simplified Travel is a User-Centered Design coursework project developed at the 
 
 The project followed a user-centered design process, including user interviews, persona development, UX principle selection, paper prototyping, Wizard-of-Oz testing, feedback analysis, and final design iteration.
 
+## Project Team
+
+This project was completed by:
+
+* Vaibhav Motwani
+* Georgios Valsamidis
+* Ariton Verush
+* Aditya Deshpande
+
+Academic context:
+
+* Course: User-Centered Design
+* Professor: Florian Egger
+
 ## Project Context
 
 The design challenge focused on creating a travel planning experience that supports different user needs, including budget-conscious travelers, comfort-seeking users, spontaneous travelers, and users who prefer planning trips collaboratively with friends.
