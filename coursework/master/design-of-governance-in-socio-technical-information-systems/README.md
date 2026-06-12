@@ -17,7 +17,6 @@ This project was completed by:
 Academic context:
 
 * Course: Design of Governance in Socio-Technical Information Systems
-* University: University of Neuchâtel
 * Professor: Alain Sandoz
 * Assistant: Andreas Athanasopoulos
 
