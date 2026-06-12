@@ -4,6 +4,19 @@ This project was developed as part of the Seminar Urban Computing course during 
 
 The project explores the idea of identifying and visualizing crime hotspots in an urban environment using data-driven analysis and map-based representation.
 
+## Project Team
+
+This project was completed by:
+
+* Ariton Verush
+* Vaibhav Motwani
+
+Academic context:
+
+* Seminar: Urban Computing
+* Professor: Edy Portmann
+* Assistant: Narek Andreasyan
+
 ## Project Overview
 
 The prototype focuses on crime hotspot identification and visualization for Swiss urban areas. It combines a small Python-based web application with map outputs and supporting seminar documentation.
