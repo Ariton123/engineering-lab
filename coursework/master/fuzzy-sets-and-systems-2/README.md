@@ -6,6 +6,19 @@ Sportify Hub is a Java Spring Boot web application prototype developed for the *
 
 The project explores the use of fuzzy logic for personalized exercise recommendations. Instead of relying only on strict, crisp categories, the system uses more flexible user inputs such as age range, available free time, fitness goals, body-related attributes, and preferred sport categories to generate exercise suggestions.
 
+## Project Team
+
+This project was completed by:
+
+* Ariton Verush
+* Martin Stojkovski
+
+Academic context:
+
+* Course: Fuzzy Sets and Systems 2
+* Professor: Edy Portmann
+* Assistant: David Huser
+
 ## Project Context
 
 Modern exercise recommendation systems often provide generic or rigid suggestions. Sportify Hub was created as a coursework prototype to explore how fuzzy logic can support more adaptive and human-centered recommendations.
