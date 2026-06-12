@@ -4,6 +4,19 @@ Giftanator is a Python-based fuzzy logic application developed as part of the Fu
 
 The project explores how fuzzy reasoning can support gift recommendation decisions based on contextual information about the recipient, the relationship, and the occasion.
 
+## Project Team
+
+This project was completed by:
+
+* Ariton Verush
+* Vaibhav Motwani
+
+Academic context:
+
+* Course: Fuzzy Sets and Systems
+* Professor: Edy Portmann
+* Assistant: David Huser
+
 ## Project Overview
 
 The application asks the user a set of questions through a character-based interaction flow. Based on the provided answers, the system applies fuzzy logic rules to recommend suitable gift options.
