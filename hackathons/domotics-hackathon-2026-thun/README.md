@@ -28,4 +28,12 @@ During the event, multiple devices and controllers were analyzed using engineeri
 
 ## Outcome
 
-The collected material serves both as technical documentation and as a foundation for a future research publication focused on building automation security, protocol analysis, and practical engineering experimentation.
+The hackathon experiments and collected technical material were developed into the following research paper:
+
+**Security and Human-Centered Assessment of BACnet-Controlled DALI Infrastructure in an Educational Building Automation Testbed**
+
+- Published as a preprint on arXiv
+- arXiv identifier: `2606.17089`
+- Paper: https://arxiv.org/abs/2606.17089
+
+The paper extends the original hackathon work into a structured security and human-centered assessment of BACnet-controlled DALI infrastructure.
