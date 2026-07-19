@@ -1,0 +1,20 @@
+cmake_minimum_required(VERSION 3.16)
+project(engineering_mathematics_iterative_methods LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+add_executable(bisection src/bisection.cpp)
+add_executable(newton_raphson src/newton_raphson.cpp)
+add_executable(secant src/secant.cpp)
+
+if(MSVC)
+    target_compile_options(bisection PRIVATE /W4)
+    target_compile_options(newton_raphson PRIVATE /W4)
+    target_compile_options(secant PRIVATE /W4)
+else()
+    target_compile_options(bisection PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(newton_raphson PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(secant PRIVATE -Wall -Wextra -Wpedantic)
+endif()

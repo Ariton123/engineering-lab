@@ -1,0 +1,21 @@
+# CMake and compiled output
+build/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.o
+*.obj
+*.exe
+*.out
+
+# IDE files
+.vscode/
+.idea/
+*.cbp
+*.layout
+
+# Operating-system files
+.DS_Store
+Thumbs.db
