@@ -1,0 +1,49 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <!--SECTION-->
+    <section class="jumbotron text-center" xmlns:th="http://www.thymeleaf.org">
+        <div class="container">
+            <h1 class="jumbotron-heading">WEB PROGRAMMING SHOP</h1>
+        </div>
+    </section>
+    <div class="container mb-5">
+        <div class="row">
+            <div class="col-md-5">
+                <form th:method="POST" th:action="@{'/naracki/moiAvtomobili/{id}'(id=${avtomobil?.getId()})}" >
+                    <div class="form-group">
+                        <label for="marka">Marka</label> <input name="marka" type="text" class="form-control" id="marka" placeholder="Enter  marka"  th:value="${avtomobil} != null ? ${avtomobil.getMarka()} : ''  " required>
+                    </div>
+                    <div class="form-group">
+                        <label for="model">Model</label> <input name="model" type="text" class="form-control" id="model" placeholder="Enter  model"  th:value="${avtomobil} != null ? ${avtomobil.getModel()} : ''  " required>
+                    </div>
+                    <div class="form-group">
+                        <label for="menuvac">Menuvac</label> <input name="menuvac" type="text" class="form-control" id="menuvac" placeholder="Enter  menuvac"  th:value="${avtomobil} != null ? ${avtomobil.getMenuvac()} : ''  " required>
+                    </div>
+                    <div class="form-group">
+                        <label for="boja">Boja</label> <input name="boja" type="text" class="form-control" id="boja" placeholder="Enter  boja"  th:value="${avtomobil} != null ? ${avtomobil.getBoja()} : ''  " required>
+                    </div>
+                    <div class="form-group">
+                        <label for="kilometraza">Kilometraza</label> <input name="kilometraza" type="text" class="form-control" id="kilometraza" placeholder="Enter  kilometraza"  th:value="${avtomobil} != null ? ${avtomobil.getKilometraza()} : ''  " required>
+                    </div>
+                    <div class="form-group">
+                        <label for="godinaProizvodstvo">Godina Proizvodstvo</label> <input name="godinaProizvodstvo" type="text" class="form-control" id="godinaProizvodstvo" placeholder="Enter  Godina na Proizvodstvo"  th:value="${avtomobil} != null ? ${avtomobil.getGodinaProizvodstvo()} : ''  " required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipGorivo">Tip Gorivo</label> <input name="tipGorivo" type="text" class="form-control" id="tipGorivo" placeholder="Enter  tip na Gorivo"  th:value="${avtomobil} != null ? ${avtomobil.getTipGorivo()} : ''  " required>
+                    </div>
+                    <div class="form-group">
+                        <label for="kategorija">Kategorija</label> <input name="kategorija" type="text" class="form-control" id="kategorija" placeholder="Enter  kategorija"  th:value="${avtomobil} != null ? ${avtomobil.getKategorija()} : ''  " required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cena">Cena</label> <input name="cena" type="text" class="form-control" id="cena" placeholder="Enter  cena"  th:value="${avtomobil} != null ? ${avtomobil.getCena()} : ''  " required>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a type="button" class="btn btn-primary" href="/naracki/moiAvtomobili">Back</a>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</th:block>

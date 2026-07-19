@@ -1,0 +1,116 @@
+<th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+
+    <!--SECTION-->
+    <section class="jumbotron text-center"  xmlns:th="http://www.thymeleaf.org">
+        <div class="container">
+            <th:block sec:authorize="hasRole('ROLE_KUPUVAC')">
+                <h1 class="jumbotron-heading" > LISTA MOI NARACKI</h1>
+            </th:block>
+        </div>
+    </section>
+
+    <div class="container mb-5">
+
+
+            <div class="col-md-12" th:if="${narackiPending.size()>0 }">
+                <h3>Сеуште неодобрени нарачки</h3>
+                <div class="table-responsive">
+                    <table  class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Datum na naracka</th>
+                            <th scope="col">Iznos</th>
+                            <th scope="col">Kupuvac</th>
+                            <th scope="col">Avtomobil</th>
+                            <th scope="col">Sopstvenik na avtomobil</th>
+                            <th scope="col">Status</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="naracka : ${narackiPending}">
+                            <td th:text="${naracka.getDatum()}"></td>
+                            <td th:text="${naracka.getIznos()} "></td>
+                            <!--                            <td th:text="${naracka.getStatus()}"></td>-->
+                            <td th:text="${naracka.getKupuvac().getIme()+' '+naracka.getKupuvac().getPrezime()}"></td>
+                            <td th:text="${naracka.getAvtomobil().getMarka()}"></td>
+                            <td th:text="${naracka.getCovek().getIme()+' '+ naracka.getCovek().getPrezime()}"></td>
+
+
+                            <td>Ne e odobrena!</td>
+                            <td class="text-right">
+                                <!--                                <th:block sec:authorize="hasRole('ROLE_SOPSTVENIK')">-->
+<!--                                <form th:method="DELETE" th:action="@{'/naracki/delete/{Id}' (Id=${naracka.getId()})}">-->
+<!--                                    <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash">Одби нарачка</i></button>-->
+<!--                                </form>-->
+                                <!--                                </th:block>-->
+                                <!--                                <th:block sec:authorize="hasRole('ROLE_SOPSTVENIK')">-->
+<!--                                <a class="btn btn-sm btn-success" th:href="@{'/naracki/success'}"><i class="fa fa-trash">Прифати Нарачка</i></a>-->
+                                <a class="btn btn-sm btn-info" th:href="@{'/avtomobili/moiNaracki/detali/{Id}' (Id=${naracka.getCovek().getId()})}"><i class="fa fa-trash">Детали за сопственик</i></a>
+                                <!--                                </th:block>-->
+                                <!--                                <form th:method="POST" th:action="@{'/shopping-cart/add-product/{id}' (id=${avtomobil.getId()})}"-->
+                                <!--                                      sec:authorize="isAuthenticated()">-->
+                                <!--                                    &lt;!&ndash;                                    <br>&ndash;&gt;-->
+                                <!--                                    &lt;!&ndash;                                    <button type="submit" class="btn btn-sm btn-info"><i class="fa fa-trash">AddProductToCard</i></button>&ndash;&gt;-->
+                                <!--                                </form>-->
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <div class="col-md-12" th:if="${naracki.size()>0 }">
+            <h3>Одобрени нарачки</h3>
+            <div class="table-responsive">
+                <table  class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Datum na naracka</th>
+                        <th scope="col">Iznos</th>
+                        <th scope="col">Kupuvac</th>
+                        <th scope="col">Avtomobil</th>
+                        <th scope="col">Sopstvenik na avtomobil</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Sostojba</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="naracka : ${naracki}">
+                        <td th:text="${naracka.getDatum()}"></td>
+                        <td th:text="${naracka.getIznos()} "></td>
+                        <!--                            <td th:text="${naracka.getStatus()}"></td>-->
+                        <td th:text="${naracka.getKupuvac().getIme()+' '+naracka.getKupuvac().getPrezime()}"></td>
+                        <td th:text="${naracka.getAvtomobil().getMarka()}"></td>
+                        <td th:text="${naracka.getCovek().getIme()+' '+ naracka.getCovek().getPrezime()}"></td>
+
+
+                        <td>Odobrena!</td>
+                        <td th:text="${naracka.platena} ? 'Платена!' : 'Не е платена!'"></td>
+                        <td class="text-right">
+                            <!--                                <th:block sec:authorize="hasRole('ROLE_SOPSTVENIK')">-->
+                            <!--                                <form th:method="DELETE" th:action="@{'/naracki/delete/{Id}' (Id=${naracka.getId()})}">-->
+                            <!--                                    <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash">Одби нарачка</i></button>-->
+                            <!--                                </form>-->
+                            <!--                                </th:block>-->
+                            <!--                                <th:block sec:authorize="hasRole('ROLE_SOPSTVENIK')">-->
+                                                           <th:block th:if="${!naracka.platena}"> <a class="btn btn-sm btn-success" th:href="@{'/avtomobili/moiNaracki/{id}/payment'(id=${naracka.getId()})}"><i class="fa fa-trash">Наплата</i></a> </th:block>
+                            <a class="btn btn-sm btn-info" th:href="@{'/avtomobili/moiNaracki/detali/{Id}' (Id=${naracka.getCovek().getId()})}"><i class="fa fa-trash">Детали за сопственик</i></a>
+                            <!--                                </th:block>-->
+                            <!--                                <form th:method="POST" th:action="@{'/shopping-cart/add-product/{id}' (id=${avtomobil.getId()})}"-->
+                            <!--                                      sec:authorize="isAuthenticated()">-->
+                            <!--                                    &lt;!&ndash;                                    <br>&ndash;&gt;-->
+                            <!--                                    &lt;!&ndash;                                    <button type="submit" class="btn btn-sm btn-info"><i class="fa fa-trash">AddProductToCard</i></button>&ndash;&gt;-->
+                            <!--                                </form>-->
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+
+    </div>
+</th:block>

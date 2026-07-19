@@ -1,0 +1,80 @@
+<th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+
+    <!--SECTION-->
+    <section class="jumbotron text-center"  xmlns:th="http://www.thymeleaf.org">
+        <div class="container">
+            <th:block sec:authorize="hasRole('ROLE_KUPUVAC')">
+                <h1 class="jumbotron-heading" >LISTA AVTOMOBILI</h1>
+            </th:block>
+            <!--            <th:block sec:authorize="hasRole('ROLE_SOPSTVENIK')">-->
+            <!--                <h1 class="jumbotron-heading" th:text="LISTA NARACKI NA ${#request.getRemoteUser()}"></h1>-->
+            <!--            </th:block>-->
+        </div>
+    </section>
+
+    <div class="container mb-5">
+
+        <div  class="row">
+            <th:block sec:authorize="hasRole('ROLE_SOPSTVENIK')">
+                <div class="col-md-12" th:if="${avtomobili.size()>0}">
+                    <div class="table-responsive">
+                        <table id="taable" class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">Marka</th>
+                                <th scope="col">Boja</th>
+                                <th scope="col">Godina Proizvodstvo</th>
+                                <th scope="col">Kategorija</th>
+                                <th scope="col">Kilometraza</th>
+                                <th scope="col">Menuvac</th>
+                                <th scope="col">Model</th>
+                                <th scope="col">Tip Gorivo</th>
+                                <th scope="col">Sopstvenik</th>
+                                <th scope="col">Cena</th>
+                                <th scope="col"></th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="avtomobil:${avtomobili}">
+                                <td th:text="${avtomobil.getMarka()}"></td>
+                                <td th:text="${avtomobil.getBoja()}"></td>
+                                <td th:text="${avtomobil.getGodinaProizvodstvo()}"></td>
+                                <td th:text="${avtomobil.getKategorija()}"></td>
+                                <td th:text="${avtomobil.getKilometraza()}"></td>
+                                <td th:text="${avtomobil.getMenuvac()}"></td>
+                                <td th:text="${avtomobil.getModel()}"></td>
+                                <td th:text="${avtomobil.getTipGorivo()}"></td>
+                                <td th:text="${avtomobil.getCovek().getIme()}"></td>
+                                <td th:text="${avtomobil.getCena()}"></td>
+                                <!--                            <td th:text="${product.getManufacturer() !=null} ? ${product.getManufacturer().getName()}: 'No Manufacturer!'"></td>-->
+
+                                <td class="text-right">
+
+                                        <form th:method="DELETE" th:action="@{'/naracki/moiAvtomobili/{Id}' (Id=${avtomobil.getId()})}">
+                                            <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash">Delete</i></button>
+                                        </form>
+
+
+                                        <a class="btn btn-sm btn-info" th:href="@{'/naracki/moiAvtomobili/edit-form/{Id}' (Id=${avtomobil.getId()})}"><i class="fa fa-trash">Edit</i></a>
+
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+        <div class="col mb-3">
+            <div class="row">
+                <div class="col-sm-12 col-md-12" sec:authorize="hasRole('ROLE_SOPSTVENIK')">
+                    <a type="button" href="/naracki/moiAvtomobili/add-form" class="btn btn-block btn-dark">Add new car</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</th:block>

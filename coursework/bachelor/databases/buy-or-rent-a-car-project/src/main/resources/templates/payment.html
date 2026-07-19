@@ -1,0 +1,90 @@
+<th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<form th:method="POST" th:action="@{'/avtomobili/moiNaracki/{id}/paymentSuccess'(id=${naracka.getId()})}">
+    <section style="padding: 2% 8% 4% 8%;">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <div class="d-flex flex-row align-items-center">
+            <h4 class="text-uppercase mt-1">BUYCAR</h4>
+            <span class="ms-2 me-3">Payment</span>
+        </div>
+        <a href="#!">Cancel and return to the website</a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-7 col-lg-7 col-xl-6 mb-4 mb-md-0">
+            <h5 class="mb-0 text-success" th:text="${naracka.getIznos() +' $' }"></h5>
+            <h5 class="mb-3" th:text="${ 'OrderId:' + naracka.getId()  }" ></h5>
+            <div>
+                <div class="d-flex justify-content-between">
+
+
+                    <span>Aetna - Open Access</span>
+                    <span>Aetna - OAP</span>
+                </div>
+                <hr />
+
+                <p>
+                    Insurance claim and all neccessary dependencies will be submitted to your
+                    insurer for the covered portion of this order.
+                </p>
+                <div class="d-flex flex-column mb-3">
+                    <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                        <input
+                                type="radio"
+                                class="btn-check"
+                                name="options"
+                                id="option1"
+                                autocomplete="off"
+                        />
+                        <label class="btn btn-outline-primary btn-lg" for="option1">
+                            <div class="d-flex justify-content-between">
+                                <span>VISA </span>
+                                <span>**** 5436</span>
+                            </div>
+                        </label>
+
+                        <input
+                                type="radio"
+                                class="btn-check"
+                                name="options"
+                                id="option2"
+                                autocomplete="off"
+                                checked
+                        />
+                        <label class="btn btn-outline-primary btn-lg" for="option2">
+                            <div class="d-flex justify-content-between">
+                                <span>MASTER CARD </span>
+                                <span>**** 5038</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success btn-lg btn-block">Proceed to payment</button>
+            </div>
+        </div>
+        <div class="col-md-5 col-lg-4 col-xl-4 offset-lg-1 offset-xl-2">
+            <div class="p-3" style="background-color: #eee;">
+                <span class="fw-bold">Order Recap</span>
+                <div class="d-flex justify-content-between mt-2">
+                    <span>contracted Price</span> <span th:text="${naracka.getIznos() +' $' }"></span>
+                </div>
+
+                <hr />
+
+
+                <hr />
+                <div class="d-flex justify-content-between mt-2">
+                    <span>Insurance Responsibility </span> <span>$00.00</span>
+                </div>
+                <div class="d-flex justify-content-between mt-2">
+                    <span>Patient Balance </span> <span>$00.00</span>
+                </div>
+                <hr />
+                <div class="d-flex justify-content-between mt-2">
+                    <span>Total </span> <span class="text-success"  th:text="${naracka.getIznos() +' $' }"> </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</form>
+</th:block>

@@ -1,0 +1,29 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+
+    <div class="container mt-5">
+        <div class="col-md-12" >
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Ime</th>
+                        <th scope="col">Prezime</th>
+                        <th scope="col">Telefonski broj</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Adresa</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td th:text="${covek.getIme()}"></td>
+                        <td th:text="${covek.getPrezime()} "></td>
+                        <!--                            <td th:text="${naracka.getStatus()}"></td>-->
+                        <td th:text="${covek.getTelefBroj()}"></td>
+                        <td th:text="${covek.getEmail()}"></td>
+                        <td th:text="${covek.getAdresa()}"></td>
+
+
+             </div>
+        </div>
+    </div>
+</th:block>

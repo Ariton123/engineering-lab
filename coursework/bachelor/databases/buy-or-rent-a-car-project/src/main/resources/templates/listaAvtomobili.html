@@ -1,0 +1,134 @@
+<th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+
+    <!--SECTION-->
+    <section class="jumbotron text-center"  xmlns:th="http://www.thymeleaf.org">
+        <div class="container">
+            <th:block sec:authorize="hasRole('ROLE_KUPUVAC')">
+            <h1 class="jumbotron-heading" >LISTA AVTOMOBILI</h1>
+            </th:block>
+<!--            <th:block sec:authorize="hasRole('ROLE_SOPSTVENIK')">-->
+<!--                <h1 class="jumbotron-heading" th:text="LISTA NARACKI NA ${#request.getRemoteUser()}"></h1>-->
+<!--            </th:block>-->
+        </div>
+    </section>
+
+    <div class="container mb-5">
+
+        <div  class="row">
+            <th:block sec:authorize="hasRole('ROLE_KUPUVAC')">
+            <div class="col-md-12" th:if="${avtomobili.size()>0}">
+                <div class="table-responsive">
+                    <table id="taable" class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Marka</th>
+                            <th scope="col">Boja</th>
+                            <th scope="col">Godina Proizvodstvo</th>
+                            <th scope="col">Kategorija</th>
+                            <th scope="col">Kilometraza</th>
+                            <th scope="col">Menuvac</th>
+                            <th scope="col">Model</th>
+                            <th scope="col">Tip Gorivo</th>
+                            <th scope="col">Sopstvenik</th>
+                            <th scope="col">Cena</th>
+                            <th scope="col"></th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="avtomobil:${avtomobili}">
+                            <td th:text="${avtomobil.getMarka()}"></td>
+                            <td th:text="${avtomobil.getBoja()}"></td>
+                            <td th:text="${avtomobil.getGodinaProizvodstvo()}"></td>
+                            <td th:text="${avtomobil.getKategorija()}"></td>
+                            <td th:text="${avtomobil.getKilometraza()}"></td>
+                            <td th:text="${avtomobil.getMenuvac()}"></td>
+                            <td th:text="${avtomobil.getModel()}"></td>
+                            <td th:text="${avtomobil.getTipGorivo()}"></td>
+                            <td th:text="${avtomobil.getCovek().getIme()}"></td>
+                            <td th:text="${avtomobil.getCena()}"></td>
+<!--                            <td th:text="${product.getManufacturer() !=null} ? ${product.getManufacturer().getName()}: 'No Manufacturer!'"></td>-->
+
+                            <td class="text-right">
+<!--                                <th:block sec:authorize="hasRole('ROLE_KUPUVAC')">-->
+                                    <form th:method="POST" th:action="@{'/avtomobili/naracaj/{Id}/{Covek}/{iznos}'(Id=${avtomobil.getId()},Covek=${avtomobil.getCovek().getId()},iznos=${avtomobil.getCena()})}">
+                                        <button type="submit" class="btn btn-sm btn-info"><i class="fa fa-trash">Нарачај</i></button>
+                                    </form>
+<!--                                </th:block>-->
+<!--                                <th:block sec:authorize="hasRole('ROLE_KUPUVAC')">-->
+<!--                                    <a class="btn btn-sm btn-info" th:href="@{'/home/edit-form/{Id}' (Id=${avtomobil.getId()})}"><i class="fa fa-trash">Edit</i></a>-->
+<!--                                </th:block>-->
+<!--                                <form th:method="POST" th:action="@{'/shopping-cart/add-product/{id}' (id=${avtomobil.getId()})}"-->
+<!--                                      sec:authorize="isAuthenticated()">-->
+<!--&lt;!&ndash;                                    <br>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <button type="submit" class="btn btn-sm btn-info"><i class="fa fa-trash">AddProductToCard</i></button>&ndash;&gt;-->
+<!--                                </form>-->
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </th:block>
+<!--            <div class="col mb-3">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-sm-12 col-md-12" sec:authorize="hasRole('ROLE_SOPSTVENIK')">-->
+<!--                        <a type="button" href="/products/add-form" class="btn btn-block btn-dark">Add new product</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+
+
+
+<!--            <th:block sec:authorize="hasRole('ROLE_SOPSTVENIK')">-->
+<!--            <div class="col-md-12" th:if="${naracki?.size()>0 }">-->
+<!--                <div class="table-responsive">-->
+<!--                    <table class="table table-striped">-->
+<!--                        <thead>-->
+<!--                        <tr>-->
+<!--                            <th scope="col">Datum na naracka</th>-->
+<!--                            <th scope="col">Iznos</th>-->
+<!--                            <th scope="col">Kupuvac</th>-->
+<!--                            <th scope="col">Avtomobil</th>-->
+<!--                            <th scope="col">Sopstvenik na avtomobil</th>-->
+<!--                        </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+<!--                        <tr th:each="naracka : ${naracki}">-->
+<!--                            <td th:text="${narackaStat}"></td>-->
+<!--                            <td th:text="${naracka.getIznos()} "></td>-->
+<!--&lt;!&ndash;                            <td th:text="${naracka.getStatus()}"></td>&ndash;&gt;-->
+<!--                            <td th:text="${naracka.getCovek()}"></td>-->
+<!--                            <td th:text="${naracka.get}"></td>-->
+<!--                            <td th:text="${naracka.getAvtomobil().getMarka()}"></td>-->
+
+
+<!--                            <td class="text-right">-->
+<!--&lt;!&ndash;                                <th:block sec:authorize="hasRole('ROLE_SOPSTVENIK')">&ndash;&gt;-->
+<!--                                    <form th:method="DELETE" th:action="@{'/home/delete/{Id}' (Id=${naracka.getId()})}">-->
+<!--                                        <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash">Одби нарачка</i></button>-->
+<!--                                    </form>-->
+<!--&lt;!&ndash;                                </th:block>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <th:block sec:authorize="hasRole('ROLE_SOPSTVENIK')">&ndash;&gt;-->
+<!--                                    <a class="btn btn-sm btn-info" th:href="@{'/home/edit-form/{Id}' (Id=${naracka.getId()})}"><i class="fa fa-trash">Прифати Нарачка</i></a>-->
+<!--&lt;!&ndash;                                </th:block>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <form th:method="POST" th:action="@{'/shopping-cart/add-product/{id}' (id=${avtomobil.getId()})}"&ndash;&gt;-->
+<!--&lt;!&ndash;                                      sec:authorize="isAuthenticated()">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    &lt;!&ndash;                                    <br>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                                    &lt;!&ndash;                                    <button type="submit" class="btn btn-sm btn-info"><i class="fa fa-trash">AddProductToCard</i></button>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                                </form>&ndash;&gt;-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        </tbody>-->
+<!--                    </table>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            </th:block>-->
+
+        </div>
+
+    </div>
+
+</th:block>

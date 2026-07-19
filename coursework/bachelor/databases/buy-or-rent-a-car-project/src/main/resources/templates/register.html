@@ -1,0 +1,57 @@
+
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <div class="row">
+            <h2 class=" offset-md-2 col-md-8 mb-3 ">REGISTER</h2>
+        </div>
+
+
+        <div class="row">
+            <div class="offset-md-2 col-md-8 offset-md-2">
+                <form th:method="POST" th:action="@{/register}">
+                    <div class="form-group">
+                        <label  for="ime">Ime</label>
+                        <input class="form-control" id="ime" name="ime" type="text" placeholder="Enter ime" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="prezime">Prezime</label>
+                        <input class="form-control" id="prezime" name="prezime" type="text" placeholder="Enter prezime" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefBroj">Telefonski broj</label>
+                        <input class="form-control" id="telefBroj" name="telefBroj" type="text" placeholder="Enter telefBroj" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input class="form-control" id="email" name="email" type="text" placeholder="Enter email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input class="form-control" id="password" name="password" type="password" placeholder="Enter password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="adresa">Adresa</label>
+                        <input class="form-control" id="adresa" name="adresa" type="text" placeholder="Enter Adresa" required>
+                    </div>
+                    <p>
+                        <h3>Izberi uloga:</h3>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="role" type="radio" id="ROLE_SOPSTVENIK" th:value="ROLE_SOPSTVENIK" >
+                                <label class="form-check-label" for="ROLE_SOPSTVENIK" >ROLE_SOPSTVENIK</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="role" type="radio" id="ROLE_KUPUVAC" th:value="ROLE_KUPUVAC" >
+                                <label class="form-check-label" for="ROLE_KUPUVAC" >ROLE_KUPUVAC</label>
+                            </div>
+                    </p>
+                    <h1 th:if="${hasError}" th:text="${error}"></h1>
+
+                    <button class="col-md-12 btn btn-primary" type="submit">Sign up</button>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</th:block>

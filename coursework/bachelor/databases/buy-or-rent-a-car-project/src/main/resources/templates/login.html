@@ -1,0 +1,34 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <body>
+    <div class="container mt-5">
+        <div class="row">
+            <h2 class=" offset-md-2 col-md-8 mb-5 ">SIGN IN</h2>
+        </div>
+        <div class="row">
+            <div class="offset-md-2 col-md-8 offset-md-2">
+                <form th:method="POST" th:action="@{/login}">
+                    <div class="form-group">
+                        <label  for="email">EMAIL</label>
+                        <input class="form-control" id="email" name="username" type="text" placeholder="Enter Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">PASSWORD</label>
+                        <input class="form-control" id="password" name="password" type="password" placeholder="Enter Password">
+                    </div>
+
+                    <div  >
+                        <div th:text="${param?.error}" ></div>
+                    </div>
+                    <input type="submit" class="col-md-12 btn btn-primary" th:value="Submit">
+
+
+                </form>
+                <a href="/register" class="col-md-12 btn btn-primary " >Register </a>
+
+
+            </div>
+        </div>
+
+    </div>
+    </body>
+</th:block>
