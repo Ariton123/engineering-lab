@@ -1,0 +1,26 @@
+# Java build output
+out/
+build/
+target/
+*.class
+*.jar
+
+# IDE configuration
+.idea/
+.vscode/
+.vs/
+*.iml
+*.ipr
+*.iws
+
+# Test and generated reports
+# The final curated PIT report is intentionally versioned under assignment-05.
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Archives and temporary files
+*.zip
+*.tmp
+*.log
