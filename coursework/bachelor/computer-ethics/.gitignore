@@ -1,0 +1,11 @@
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Microsoft Office temporary files
+~$*
+
+# Archives
+*.zip
+*.rar
+*.7z
