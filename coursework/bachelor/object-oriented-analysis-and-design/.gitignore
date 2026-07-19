@@ -1,0 +1,15 @@
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Editor and IDE files
+.vscode/
+.idea/
+*.swp
+*.tmp
+
+# Archives and generated exports
+*.zip
+*.7z
+*.rar
+*.bak
