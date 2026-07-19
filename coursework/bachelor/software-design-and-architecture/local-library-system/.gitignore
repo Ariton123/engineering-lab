@@ -1,0 +1,27 @@
+# Java / Maven / Gradle
+*.class
+target/
+build/
+out/
+.gradle/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+
+# Eclipse / STS
+.classpath
+.project
+.settings/
+
+# Environment and secrets
+.env
+.env.*
+application-local.properties
+application-prod.properties
+
+# Logs and OS files
+*.log
+.DS_Store
+Thumbs.db

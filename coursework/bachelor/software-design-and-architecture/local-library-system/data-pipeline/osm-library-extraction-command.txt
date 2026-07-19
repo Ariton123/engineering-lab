@@ -1,0 +1,13 @@
+# Original coursework pipeline for extracting library and reading-room nodes from OpenStreetMap data.
+# Tool names and paths may need adjustment for the local operating system.
+
+osmfilter mac.osm \
+  --keep="amenity=library" \
+  --keep="amenity_1=reading room" \
+  --ignore-dependencies \
+| osmconvert64.exe - \
+  --all-to-nodes \
+  --csv="@id @lat @lon name" \
+  --csv-headline \
+  --csv-separator="," \
+  -o="library-reading-room-locations.csv"
